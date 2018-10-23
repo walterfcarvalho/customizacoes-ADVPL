@@ -21,14 +21,14 @@ Method hSQLExec(cIdx, aParam)		// recebe um id do no xml e executa um TCSQLExec
 Method New(cArq) Constructor		// construtor da classe
 
 
-getVlNo(cIdNo)
 // metodos usados internamente
 Method avisar(cMsg)
+Method getArrayN(nCampo, cLin)
 Method getCampo(nNumCampo, cLinha, cTipo )
 Method getPosIni(nCampo, cLin)
-Method getArrayN(nCampo, cLin)
-Method limpaStr(cStr)
 Method getVlNo(cIdNo)
+Method limpaStr(cStr)
+
 EndClass
 
 /*/{Protheus.doc} New
@@ -103,7 +103,7 @@ Method  cSql(cIdNo, aParams) class XmlSql
 	while (i > 0)
 
 		nQp:= i + 1
-		while (!substr(cLinha, nQp, 1) $ " ." + char(13) + char(10) + char(09))  .and. (nQp <= len(cLinha))
+		while (!substr(cLinha, nQp, 1) $ " ." + char(13) + char(10) + char(09)) .and. (nQp <= len(cLinha))
 			nQp++
 		endDo
 
@@ -263,10 +263,10 @@ Metodo auxiliar para exibir erros
 Method avisar(cMsg) class XmlSql
 	ConOut(cMsg)
 	Alert(cMsg)
-return
-resultado do dentro de um array
-return		// retorna um array com a estrutuda dos campos da query (DbStruct())
-Method getArray(cIdx, aParam) class XmlSql		// retorna o          //
+return nil
+
+// retorna um array com a estrutuda dos campos da query (DbStruct())
+Method getArray(cIdx, aParam) class XmlSql		// retorna o      
 	Local cmd	:= Self:cSql(cIdx,aParam)
 	Local aStru	:= {}
 	Local aIt	:= {}
@@ -295,7 +295,7 @@ Method getArray(cIdx, aParam) class XmlSql		// retorna o          //
 	(cTb)->(DbcloseArea())
 return aRes
 
-Method getVlNo(cIdNo) class class XmlSql
+Method getVlNo(cIdNo) class XmlSql
 	Local cLinha
 	Local cAux		:= "_" + upper(cIdNo)
 	Local oNo 		:= XmlChildEx(Self:oXml:_XML, cAux)
