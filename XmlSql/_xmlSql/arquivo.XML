@@ -1,0 +1,49 @@
+<xml>
+	<lstItens>
+		select 
+			C9_PRCVEN, 
+			CONVERT(VARCHAR(10), CAST(C9_DATALIB AS DATE), 103) AS C9_DATALIB, C9_PEDIDO, C9_ITEM, A1_NREDUZ, A1_COD, A1_LOJA, B1_DESC
+		FROM @SC9010
+		LEFT JOIN @SA1010 ON C9_CLIENTE = A1_COD AND C9_LOJA = A1_LOJA AND @SA1010.D_E_L_E_T_ = ' '
+		LEFT JOIN @SB1010 ON B1_COD = C9_PRODUTO AND  @SB1010.D_E_L_E_T_ = ' '
+		WHERE 
+			@SC9010.D_E_L_E_T_ = ' '
+			AND	C9_BLEST =' '
+			AND C9_DATALIB BETWEEN '?' AND '?'
+			order by C9_PEDIDO, C9_DATALIB, C9_ITEM
+	</lstItens>
+
+	<lstFilial>
+		SELECT concat(CODGRP, CODEMP,CODFIL, ' - ', FILIAL) AS FILIAL FROM @SM0010 ORDER BY CODFIL
+	</lstFilial>
+
+	<updSC9>
+		update @SC9010 
+			SET C9_YSZVNUM = '?' 
+		WHERE 
+			C9_FILIAL = '?'
+		AND C9_CLIENTE = '?'
+		AND C9_LOJA = '?'
+		AND C9_PEDIDO = '?'
+		AND C9_ITEM = 	'?'
+	</updSC9>
+
+	<relatorio>
+		select * from @SZV010 where ZV_FILIAL = '?' AND ZV_NUMOC = '?' AND D_E_L_E_T_ = ' ' 
+		ORDER BY ZV_CLIENTE, ZV_LOJA, ZV_PEDIDO,ZV_ITEM, ZV_PRODUTO
+	</relatorio>
+
+	<campos>
+		:1:11:333:4444:444444:
+	</campos>
+
+	<getCliente> select * from SA1010 WHERE A1_COD = '?' AND A1_LOJA = '?' AND D_E_L_E_T_ = '*'	</getCliente>
+
+	<campos2>
+		1,11,333,4444,444444
+	</campos2>
+
+
+
+
+</xml>
