@@ -1,35 +1,53 @@
 #include 'apwizard.ch'
-#include 'CF.ch'
+//#include 'CF.ch'
 #include 'parmtype.ch'
 #include 'TOPCONN.CH'
 #include 'protheus.ch'
 #INCLUDE "RWMAKE.CH"
 #INCLUDE "TBICONN.CH"
 
-user function cfChCargaInc() //u_cfChCargaInc()
+#define CRLF char(13) + char(10)
+#define cROTINA  "cargaLoja() "
+
+user function cfChCargaInc() //	u_cfChCargaInc()
+	Local i
+	Local cReplace, cErros, cAvisos
 	Local cPerg 	:= PADR("CHCARGACF", 10)
 	Local cmd 		:= 	"   Deseja efetuar uma carga de todas as alterações das tabelas:" 	+ CRLF
-	Local aTbs		:= 	{}
+	Local aCampos	:= 	{}
 	Local oProcess
-	Private oHp := Hash():new("\_cargaCF.ini", .F.)
+	Local oXml
+
+
+	cReplace 	:=  ""
+	cErros 		:=  ""
+	cAvisos 	:= ""
 
 	AjustaSX1(cPerg)
 
 	If Pergunte(cPerg,.T.)
-		putMv("CF_UCD", dtos(MV_PAR01))
-		putMv("CF_UCH", "00:00:00")
+		putMv("CT_UCD", dtos(MV_PAR01))
+		putMv("CT_UCH", "00:00:00")
 	else
 		return
 	endif
 
-	aTbs := 	oHp:getHashs()
+	oXml := XmlParser(MemoRead("\_cargaLoja.xml"), cReplace, @cErros, @cAvisos)
+	if (cErros <> "") .or. (cAvisos <> "")
+		u_mErro("Houve problema ao carregar o Xml do arquivo \_cargaLoja.xml"  + CRLF + "Erros : " + cErros + CRLF + "Avisos: " + cAvisos)
+		return	
+	endIf
 
-	for i:=1 to len(aTbs)
-		cmd += " - " + Posicione("SX2", 1, oHp:gpc(aTbs[i], 2), "X2_NOME") + CRLF
+	for i:=1 to len(oxml:_xml:_carga)
+		aadd(aCampos, Limpa(oxml:_xml:_carga[i]:_tabela:text)  )
+	Next
+
+	for i:=1 to len(aCampos)
+		cmd += " - " + aCampos[i] + " - " + Posicione("SX2", 1, aCampos[i], "X2_NOME") + CRLF
 	next
 
 	if u_mQuestion(cmd)
-		oProcess := MsNewProcess():New({|lEnd| cmd := u_cfCargaInc(cFilAnt,, @oProcess, @lEnd) },"","Carga de dados", .F.)
+		oProcess := MsNewProcess():New({|lEnd| cmd := u_cfCargaInc(cFilAnt, nil, @oProcess, @lEnd) },"","Carga de dados", .F.)
 		oProcess:Activate()
 
 		u_mExclama(cmd)
@@ -55,7 +73,7 @@ Static Function AjustaSX1(cPerg)
 		SX1->X1_HELP	:= cPerg + "01"
 		MsUnlock()
 
-		fPuthelp(cPerg + "01", "Informar a partir de que data que baixar as atualizações " )
+		fPuthelp(cPerg + "01", "Informar a partir de que data que baixar as atualizações! " )
 	endif
 Return
 
@@ -81,3 +99,17 @@ Static Function fPutHelp(cKey, cHelp, lUpdate)
 		EndIf
 	EndIf
 Return
+
+static function Limpa(cStr)
+	Local aLstChar := {9,10}
+	Local i
+	Local cRes	:= ""
+
+	cStr := Alltrim(cStr)
+
+	for i:= 1  to len(cStr)
+		if aScan(aLstChar,  ASC(SUBSTR(cStr, i, 1)) ) = 0 
+			cRes += SUBSTR(cStr, i, 1)
+		endif
+	Next
+return cRes

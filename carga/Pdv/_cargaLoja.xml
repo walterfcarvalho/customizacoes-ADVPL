@@ -1,0 +1,78 @@
+<xml>
+	<carga>
+		<tabela>SLK</tabela>
+		<ehporfil>0</ehporfil>
+		<tbbanco>SLK010</tbbanco>
+		<preftb>LK</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>LK_FILIAL, LK_CODBAR,LK_CODIGO, LK_QUANT</campos>
+	</carga>
+
+	<carga>
+		<tabela>SB0</tabela>
+		<ehporfil>1</ehporfil>
+		<tbbanco>SB0010</tbbanco>
+		<preftb>B0</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>B0_FILIAL, B0_COD, B0_PRV1, B0_HREXP, B0_MSEXP</campos>
+	</carga>
+	
+	<carga>
+		<tabela>SB1</tabela>
+		<ehporfil>0</ehporfil>
+		<tbbanco>SB1010</tbbanco>
+		<preftb>B1</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>B1_FILIAL,B1_COD, B1_DESC, B1_TIPO, B1_CODITE, B1_UM, B1_LOCPAD, B1_GRUPO, B1_PICM, B1_IPI, B1_POSIPI , B1_ESPECIE, B1_ALIQISS, B1_CODISS, B1_TE, B1_TS, B1_PICMRET, B1_PICMENT, B1_IMPZFRC, B1_SEGUM , B1_CUSTD, B1_MCUSTD, B1_PESO, B1_ESTFOR, B1_FORPRZ, B1_LE, B1_CC, B1_FAMILIA, B1_QB, B1_APROPRI, B1_ORIGEM, B1_CLASFIS , B1_FORAEST, B1_COMIS, B1_PERINV, B1_GRTRIB, B1_MRP, B1_PRVALID, B1_NUMCOP, B1_CODBAR, B1_FPCOD, B1_LOCALIZ, B1_DESC_GI, B1_DESC_I, B1_VLREFUS, B1_VALEPRE, B1_MSBLQL</campos>
+	</carga>
+	
+	<carga>
+		<tabela>SA3</tabela>
+		<ehporfil>1</ehporfil>
+		<tbbanco>SA3010</tbbanco>
+		<preftb>A3</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>A3_FILIAL, A3_COD, A3_NOME, A3_NREDUZ, A3_COMIS, A3_MSBLQL</campos>
+	</carga>
+	
+	<carga>
+		<tabela>SA1</tabela>
+		<ehporfil>0</ehporfil>
+		<tbbanco>SA1010</tbbanco>
+		<preftb>A1</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2,3</camposidx>
+		<where>/* */</where>
+		<campos>A1_FILIAL, A1_COD, A1_LOJA, A1_NOME, A1_CGC, A1_NREDUZ, A1_MSBLQL </campos>
+	</carga>
+	
+	<carga>
+		<tabela>SAE</tabela>
+		<ehporfil>0</ehporfil>
+		<tbbanco>SAE010</tbbanco>
+		<preftb>AE</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>AE_FILIAL,AE_COD,AE_DESC,AE_DIAS,AE_TAXA,AE_VENCTO,AE_TIPO,AE_USAFATO,AE_VENCFIN,AE_FINPRO,AE_CODCLI,AE_REDE,AE_GRPFRT,AE_PLABEL,AE_AGLPARC,AE_SOFEXP,AE_DESCSE,AE_SEGURAD,AE_ADMCART,AE_VCOMPRA,AE_PARCDE,AE_PARCATE,AE_DIAUTIL,AE_DGNSU,AE_HREXP,AE_MSEXP,AE_DEPARA,AE_SAT,AE_ECCODIG,AE_LAYOUT,AE_LAYIMP,AE_CODEXT,AE_DIAEMI,AE_FIXADIA,AE_REDEAUT,AE_PCORTE,AE_DCORTE</campos>
+	</carga>
+	
+	<carga>
+		<tabela>SF4</tabela>
+		<ehporfil>0</ehporfil>
+		<tbbanco>SF4010</tbbanco>
+		<preftb>F4</preftb>
+		<idxtb>1</idxtb>
+		<camposidx>1,2</camposidx>
+		<where>/* */</where>
+		<campos>*</campos>
+	</carga>
+</xml>
